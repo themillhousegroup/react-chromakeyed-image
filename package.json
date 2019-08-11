@@ -4,7 +4,8 @@
   "description": "React Component allowing color substitutions to be defined on an image",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test-watch": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -26,10 +27,13 @@
   },
   "homepage": "https://github.com/themillhousegroup/react-chromakeyed-image#readme",
   "devDependencies": {
+    "@types/jest": "^24.0.17",
     "@types/react": "^16.9.1",
     "@types/react-dom": "^16.8.5",
+    "jest": "^24.8.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "ts-jest": "^24.0.2",
     "typescript": "^3.5.3"
   }
 }
