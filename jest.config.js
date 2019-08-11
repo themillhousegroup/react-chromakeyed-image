@@ -1,4 +1,6 @@
 module.exports = {
+  "coverageDirectory": "coverage",
+  "coverageReporters": ["text", "html"],
   "roots": [
     "<rootDir>/src"
   ],
