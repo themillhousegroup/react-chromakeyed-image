@@ -11,7 +11,17 @@ describe('PixelUtils', () => {
 		it('returns true on equal objects', () => {
 			expect(PixelUtils.areEqual({ r: 1, g: 3, b: 2, a: 9 }, { r: 1, g: 3, b: 2, a: 9})).toBe(true);	
 		});
-
+	});
+	describe('#areClose', () => {
+		it('returns false on unequal objects outside of tolerance', () => {
+			expect(PixelUtils.areClose({ r: 1, g: 3, b: 2, a: 9 }, { r: 10, g: 13, b: 12, a: 9}, 5)).toBe(false);	
+		});
+		it('returns true on equal objects', () => {
+			expect(PixelUtils.areClose({ r: 1, g: 3, b: 2, a: 9 }, { r: 1, g: 3, b: 2, a: 9}, 5)).toBe(true);	
+		});
+		it('returns true on unequal objects inside of tolerance', () => {
+			expect(PixelUtils.areClose({ r: 1, g: 3, b: 2, a: 9 }, { r: 5, g: 3, b: 3, a: 6}, 5)).toBe(true);	
+		});
 	});
 	describe('#reduceToPixels', () => {
 		it('returns empty on non-multiple-of-four array', () => {
