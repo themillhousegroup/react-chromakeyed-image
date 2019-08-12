@@ -3,6 +3,7 @@
     "outDir": "./lib",
     "target": "es6",
     "module": "commonjs",
+    "esModuleInterop": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
     "removeComments": true,
