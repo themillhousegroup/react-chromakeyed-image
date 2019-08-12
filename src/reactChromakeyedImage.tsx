@@ -4,13 +4,14 @@ import { TransformUtils, PixelReplacementFunction } from './transformUtils';
 import { getSimpleTransform } from './transforms/simpleTransform';
 import { getStrictMapTransform } from './transforms/strictMapTransform';
 import { getTolerantMapTransform } from './transforms/tolerantMapTransform';
+import { getTolerantTransform } from './transforms/tolerantTransform';
 
 type Props = {
 	src: string;
 	findColor?: string;
 	replaceColor?: string;
 	tolerance?: number; 
-	colorReplacementMap?: object;
+	colorReplacementMap?: Record<string, string>;
 	replacementFunction?: PixelReplacementFunction; 
 };
 
@@ -37,7 +38,7 @@ const ReactChromakeyedImage: React.SFC<Props> = (props:Props) => {
 			const replacementColorAsPixel = ColorStringUtils.toRGBAPixel(replaceColor);
 
 			if (tolerance && tolerance > 0) {
-				
+				return getTolerantTransform(findColorAsPixel, replacementColorAsPixel, tolerance);
 			}
 
 			return getSimpleTransform(findColorAsPixel, replacementColorAsPixel); 

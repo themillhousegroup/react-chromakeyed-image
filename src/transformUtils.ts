@@ -18,4 +18,7 @@ export class TransformUtils {
 		const asRGBAArray = PixelUtils.expandToRGBAArray(newPixels);
 		return new ImageData(asRGBAArray, imageData.width, imageData.height);
 	}
+
+	// A Polyfill for the ES2017 Object.entries() method
+	static entries = (obj:Record<string, string>) => Object.keys(obj).map(key => [key, obj[key]]);
 }
