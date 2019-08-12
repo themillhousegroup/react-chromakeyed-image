@@ -1,7 +1,9 @@
 import { ColorStringUtils } from '../colorStringUtils';
 import { PixelUtils, RGBAPixel } from '../pixelUtils';
+import { PixelReplacementFunction } from '../transformUtils';
 
-export const getTolerantMapTransform = (replacementMap:object, tolerance: number) => {
+
+export const getTolerantMapTransform = (replacementMap:object, tolerance: number):PixelReplacementFunction => {
   const colors = Object.keys(replacementMap).map(ColorStringUtils.toRGBAPixel);
 
   const colorMap: Map<String, RGBAPixel> = new Map(Object.entries(replacementMap).map(([inString, outString]) => {

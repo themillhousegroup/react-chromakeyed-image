@@ -1,7 +1,9 @@
 import { ColorStringUtils } from '../colorStringUtils';
 import { RGBAPixel } from '../pixelUtils';
+import { PixelReplacementFunction } from '../transformUtils';
 
-export const getStrictMapTransform = (replacementMap:object) => {
+
+export const getStrictMapTransform = (replacementMap:object):PixelReplacementFunction => {
   const colorMap: Map<String, RGBAPixel> = new Map(Object.entries(replacementMap).map(([inString, outString]) => {
     return [JSON.stringify(ColorStringUtils.toRGBAPixel(inString)), ColorStringUtils.toRGBAPixel(outString)];
   }));
