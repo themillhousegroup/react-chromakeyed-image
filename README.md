@@ -9,26 +9,30 @@ React Component allowing color substitutions to be defined on an image, similar 
 #### Basic usage
 In your React app:
 
-```
+```JSX
 import ReactChromakeyedImage from 'react-chromakeyed-image';
 
 ...
-export default () => {
-	return (
-		<div style={{backgroundColor: "#cccccc"}}>
-			<h1>Original</h1>
-			<img src="/static/240px-face.png" />
-			<h1>Chromakeyed</h1>
-			<ReactChromakeyedImage src="/static/240px-face.png" findColor="#fede58" replaceColor="#FF0000" />
+
+    <div style={{backgroundColor: "#cccccc"}}>
+
+      <h1>Original</h1>
+      <img src="/static/240px-face.png" />
+
+      <h1>Chromakeyed</h1>
+      <ReactChromakeyedImage 
+        src="/static/240px-face.png" 
+        findColor="#fede58" 
+        replaceColor="#FF0000" />
+
     </div>
-  );
-}
-
 ```
+![Basic usage](https://github.com/themillhousegroup/react-chromakeyed-image/docs/images/basic.png)
 
-All instance of color `findColor` will be replaced with `replaceColor`.
-Note that you can use `#rrggbb`, `#rrggbbaa`, `#rgb` or `#rgba` forms of specifying a color.
-If you omit the Alpha channel, it will be assumed to be `0xFF`.
+Notes:
+- All instances of color `findColor` will be replaced with `replaceColor`.
+- Note that you can use `#rrggbb`, `#rrggbbaa`, `#rgb` or `#rgba` forms of specifying a color.
+- If you omit the Alpha channel, it will be assumed to be `0xFF`.
 
 
 
