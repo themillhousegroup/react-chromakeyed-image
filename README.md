@@ -41,7 +41,7 @@ import ReactChromakeyedImage from 'react-chromakeyed-image';
       <h1>Original</h1>
       <img src="/static/240px-face.png" />
 
-      <h1>Chromakeyed</h1>
+      <h1>Chromakeyed [Tolerant]</h1>
       <ReactChromakeyedImage 
         src="/static/240px-face.png" 
         findColor="#fede58" 
