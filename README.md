@@ -13,9 +13,6 @@ In your React app:
 import ReactChromakeyedImage from 'react-chromakeyed-image';
 
 ...
-
-    <div style={{backgroundColor: "#cccccc"}}>
-
       <h1>Original</h1>
       <img src="/static/240px-face.png" />
 
@@ -24,10 +21,9 @@ import ReactChromakeyedImage from 'react-chromakeyed-image';
         src="/static/240px-face.png" 
         findColor="#fede58" 
         replaceColor="#FF0000" />
-
-    </div>
+...
 ```
-![Basic usage](https://github.com/themillhousegroup/react-chromakeyed-image/docs/images/basic.png)
+![Basic usage](https://raw.githubusercontent.com/themillhousegroup/react-chromakeyed-image/master/docs/images/basic.png)
 
 Notes:
 - All instances of color `findColor` will be replaced with `replaceColor`.
