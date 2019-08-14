@@ -30,5 +30,28 @@ Notes:
 - Note that you can use `#rrggbb`, `#rrggbbaa`, `#rgb` or `#rgba` forms of specifying a color.
 - If you omit the Alpha channel, it will be assumed to be `0xFF`.
 
+### Adding Tolerance
+You've probably observed some "fringes" or artifacts in the above transformed image. Unless you have very tight control over your source images (e.g. they are machine-generated), you'll need to add the `tolerance` prop, which specifies a plus-or-minus range to be applied to each `r`, `g`, `b`, and `a` value in the `findColor`.
+
+
+```JSX
+import ReactChromakeyedImage from 'react-chromakeyed-image';
+
+...
+      <h1>Original</h1>
+      <img src="/static/240px-face.png" />
+
+      <h1>Chromakeyed</h1>
+      <ReactChromakeyedImage 
+        src="/static/240px-face.png" 
+        findColor="#fede58" 
+        replaceColor="#FF0000" 
+        tolerance={10}
+      />
+...
+```
+![With tolerance](https://raw.githubusercontent.com/themillhousegroup/react-chromakeyed-image/master/docs/images/tolerant.png)
+
+
 
 
