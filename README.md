@@ -62,7 +62,7 @@ import ReactChromakeyedImage from 'react-chromakeyed-image';
       <h1>Original</h1>
       <img src="/static/240px-face.png" />
 
-      <h1>Chromakeyed [Tolerant]</h1>
+      <h1>Chromakeyed [Mapped]</h1>
       <ReactChromakeyedImage 
         src="/static/240px-face.png" 
         colorReplacementMap={{ "#fede58": "#00FF00", "#871945": "#00f"}}
@@ -70,6 +70,28 @@ import ReactChromakeyedImage from 'react-chromakeyed-image';
 ...
 ```
 ![Mapped](https://raw.githubusercontent.com/themillhousegroup/react-chromakeyed-image/master/docs/images/mapped.png)
+
+
+#### Color replacement map with tolerance
+You can add the `tolerance` prop when using a `colorReplacementMap` too:
+
+```JSX
+import ReactChromakeyedImage from 'react-chromakeyed-image';
+
+...
+      <h1>Original</h1>
+      <img src="/static/240px-face.png" />
+
+      <h1>Chromakeyed [Tolerant Mapped]</h1>
+      <ReactChromakeyedImage 
+        src="/static/240px-face.png" 
+        colorReplacementMap={{ "#fede58": "#00FF00", "#871945": "#00f"}}
+        tolerance={20} 
+      />
+...
+```
+![Mapped-Tolerant](https://raw.githubusercontent.com/themillhousegroup/react-chromakeyed-image/master/docs/images/mapped-tolerant.png)
+
 
 
 
