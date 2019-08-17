@@ -1,6 +1,6 @@
 {
   "name": "react-chromakeyed-image",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React Component allowing color substitutions to be defined on an image",
   "main": "index.js",
   "scripts": {
