@@ -106,6 +106,7 @@ export type RGBAPixel = {
 
 export type PixelReplacementFunction = (pixel: RGBAPixel, x:number, y:number) => RGBAPixel;
 ```
+The first argument is the original `{r, b, b, a}` value of the pixel. Then come the `x` and `y` co-ordinates of that pixel. The function should always return a pixel in the form `{r, g, b, a}`, even if no change was made to it.
 
 This allows you to apply different replacements depending on the co-ordinates within the image, as in the following example, which only makes changes to a small horizontal band of pixels, leaving all others unchanged:
 
