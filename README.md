@@ -92,6 +92,42 @@ import ReactChromakeyedImage from 'react-chromakeyed-image';
 ```
 ![Mapped-Tolerant](https://raw.githubusercontent.com/themillhousegroup/react-chromakeyed-image/master/docs/images/mapped-tolerant.png)
 
+#### Custom replacement function
+Sometimes, what you need to do can't be expressed with a static map. For those times, you can supply a function as the `replacementFunction` prop. The function takes 3 arguments, as per the following TypeScript declarations:
+
+```TypeScript
+export type RGBAPixel = {
+	r: number; 
+	b: number; 
+	g: number;
+ 	a: number;
+}
+
+export type PixelReplacementFunction = (pixel: RGBAPixel, x:number, y:number) => RGBAPixel;
+```
+
+This allows you to apply different replacements depending on the co-ordinates within the image, as in the following example, which only makes changes to a small horizontal band of pixels, leaving all others unchanged:
+
+```JSX
+import ReactChromakeyedImage from 'react-chromakeyed-image';
+
+...
+      <h1>Original</h1>
+      <img src="/static/240px-face.png" />
+
+			<h3>Chromakeyed [Custom function]</h3>
+			<ReactChromakeyedImage src="/static/240px-face.png" replacementFunction={({r,g,b,a},x, y) => { 
+				if ( y > 50 && y < 120) {
+					return { r: 0x30, g: 0x30, b: 0x30, a};
+				}
+				return { r, g, b, a};
+				}}
+				/>
+...
+```
+![Custom](https://raw.githubusercontent.com/themillhousegroup/react-chromakeyed-image/master/docs/images/custom.png)
+
+
 
 
 
