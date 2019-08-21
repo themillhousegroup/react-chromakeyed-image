@@ -16,7 +16,7 @@ type Props = {
 };
 
 const ReactChromakeyedImage: React.SFC<Props> = (props:Props) => {
-	const {src, findColor, replaceColor, tolerance, colorReplacementMap, replacementFunction } = props;
+	const {src, findColor, replaceColor, tolerance, colorReplacementMap, replacementFunction, ...otherProps } = props;
 
 	const imgRef = useRef<HTMLImageElement>(null);
 	const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -69,7 +69,7 @@ const ReactChromakeyedImage: React.SFC<Props> = (props:Props) => {
 			<div style={{display: 'none'}}>
 			<img ref={imgRef} src={src} />
 			</div>
-			<canvas ref={canvasRef} />
+			<canvas ref={canvasRef} {...otherProps} />
 		</React.Fragment>
 	);
 };
