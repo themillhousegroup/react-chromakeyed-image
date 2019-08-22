@@ -13,10 +13,10 @@ In your React app:
 import ReactChromakeyedImage from 'react-chromakeyed-image';
 
 ...
-    <h1>Original</h1>
+    <h3>Original</h3>
     <img src="/static/240px-face.png" />
 
-    <h1>Chromakeyed</h1>
+    <h3>Chromakeyed</h3>
     <ReactChromakeyedImage 
       src="/static/240px-face.png" 
       findColor="#fede58" 
@@ -39,10 +39,10 @@ You've probably observed some "fringes" or artifacts in the above transformed im
 import ReactChromakeyedImage from 'react-chromakeyed-image';
 
 ...
-    <h1>Original</h1>
+    <h3>Original</h3>
     <img src="/static/240px-face.png" />
 
-    <h1>Chromakeyed [Tolerant]</h1>
+    <h3>Chromakeyed [Tolerant]</h3>
     <ReactChromakeyedImage 
       src="/static/240px-face.png" 
       findColor="#fede58" 
@@ -60,10 +60,10 @@ If you need to transform more than one color, supply a `colorReplacementMap` pro
 import ReactChromakeyedImage from 'react-chromakeyed-image';
 
 ...
-    <h1>Original</h1>
+    <h3>Original</h3>
     <img src="/static/240px-face.png" />
 
-    <h1>Chromakeyed [Mapped]</h1>
+    <h3>Chromakeyed [Mapped]</h3>
     <ReactChromakeyedImage 
       src="/static/240px-face.png" 
       colorReplacementMap={{ "#fede58": "#00FF00", "#871945": "#00f"}}
@@ -80,10 +80,10 @@ To avoid the fringing effects visible in the above image, you can add the `toler
 import ReactChromakeyedImage from 'react-chromakeyed-image';
 
 ...
-    <h1>Original</h1>
+    <h3>Original</h3>
     <img src="/static/240px-face.png" />
 
-    <h1>Chromakeyed [Mapped, Tolerant]</h1>
+    <h3>Chromakeyed [Mapped, Tolerant]</h3>
     <ReactChromakeyedImage 
       src="/static/240px-face.png" 
       colorReplacementMap={{ "#fede58": "#00FF00", "#871945": "#00f"}}
@@ -114,20 +114,44 @@ This allows you to apply different replacements depending on the co-ordinates wi
 import ReactChromakeyedImage from 'react-chromakeyed-image';
 
 ...
-    <h1>Original</h1>
+    <h3>Original</h3>
     <img src="/static/240px-face.png" />
 
     <h3>Chromakeyed [Custom function]</h3>
-    <ReactChromakeyedImage src="/static/240px-face.png" replacementFunction={({r,g,b,a},x, y) => { 
-      if ( y > 50 && y < 120) {
-        return { r: 0x30, g: 0x30, b: 0x30, a};
-      }
-      return { r, g, b, a};
+    <ReactChromakeyedImage 
+      src="/static/240px-face.png"    
+      replacementFunction={({r,g,b,a},x, y) => { 
+        if ( y > 50 && y < 120) {
+          return { r: 0x30, g: 0x30, b: 0x30, a};
+        }
+        return { r, g, b, a};
       }}
     />
 ...
 ```
 ![Custom](https://raw.githubusercontent.com/themillhousegroup/react-chromakeyed-image/master/docs/images/custom.png)
+
+### Other features
+#### Props are spread
+Any props you give to `ReactChromakeyedImage` will be spread onto the underlying HTML `canvas`, so you can control the overall appearance of the image however you like; e.g.:
+
+```JSX
+  <h3>Original</h3>
+  <img src="/static/240px-face.png" />
+
+  <h3>Chromakeyed (and styled)</h3>
+  <ReactChromakeyedImage
+    style={{width: '100px', 
+            height: '100px',
+            border: '3px solid black', 
+            borderRadius: '8px' }} 
+    src="/static/240px-face.png"
+    findColor="#fede58"
+    replaceColor="#FF0000" 
+  />
+```
+
+![Styled](https://raw.githubusercontent.com/themillhousegroup/react-chromakeyed-image/master/docs/images/styled.png)
 
 
 
