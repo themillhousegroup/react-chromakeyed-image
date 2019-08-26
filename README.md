@@ -153,6 +153,8 @@ Any props you give to `ReactChromakeyedImage` will be spread onto the underlying
 
 ![Styled](https://raw.githubusercontent.com/themillhousegroup/react-chromakeyed-image/master/docs/images/styled.png)
 
+#### Utility functions for working with `RGBAPixel`s and color strings
+Check out `PixelUtils` and `ColorStringUtils` for functions that might be useful when writing your own custom pixel replacement functions.
 
 
 
