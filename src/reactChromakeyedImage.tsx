@@ -6,6 +6,13 @@ import { getStrictMapTransform } from './transforms/strictMapTransform';
 import { getTolerantMapTransform } from './transforms/tolerantMapTransform';
 import { getTolerantTransform } from './transforms/tolerantTransform';
 
+// https://en.wikipedia.org/wiki/Alpha_compositing#Alpha_blending
+export enum BlendMode {
+	OPAQUE_FOREGROUND,
+	ALPHA_BLENDING,
+	ALPHA_RETAIN_BG_TRANSPARENCY
+};
+
 type Props = {
 	src: string;
 	findColor?: string;
@@ -13,10 +20,11 @@ type Props = {
 	tolerance?: number; 
 	colorReplacementMap?: Record<string, string>;
 	replacementFunction?: PixelReplacementFunction; 
+	blendMode?: BlendMode;
 };
 
 const ReactChromakeyedImage: React.SFC<Props> = (props:Props) => {
-	const {src, findColor, replaceColor, tolerance, colorReplacementMap, replacementFunction, ...otherProps } = props;
+	const {src, findColor, replaceColor, tolerance, colorReplacementMap, replacementFunction, blendMode, ...otherProps } = props;
 
 	const imgRef = useRef<HTMLImageElement>(null);
 	const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -59,7 +67,7 @@ const ReactChromakeyedImage: React.SFC<Props> = (props:Props) => {
 					if (ctx) {
 						ctx.drawImage(imgRef.current, 0, 0);
 						const originalImageData = ctx.getImageData(0,0, imgRef.current.width, imgRef.current.height);
-						ctx.putImageData(TransformUtils.transformImageData(originalImageData, pixelConversionStrategy), 0, 0);
+						ctx.putImageData(TransformUtils.transformImageData(originalImageData, pixelConversionStrategy, blendMode || BlendMode.OPAQUE_FOREGROUND), 0, 0);
 					}
 			}
 	});
