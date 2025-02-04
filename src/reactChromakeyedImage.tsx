@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { ColorStringUtils } from './colorStringUtils';
 import { TransformUtils, PixelReplacementFunction } from './transformUtils';
 import { getSimpleTransform } from './transforms/simpleTransform';
@@ -59,18 +59,16 @@ const ReactChromakeyedImage: React.SFC<Props> = (props:Props) => {
 
 	const pixelConversionStrategy = pickStrategy();
 
-	useEffect(() => {
-			if (imgRef.current && canvasRef.current && imgRef.current.complete) {
-					canvasRef.current.width = imgRef.current.width;
-					canvasRef.current.height = imgRef.current.height;
-					const ctx = canvasRef.current.getContext('2d');
-					if (ctx) {
-						ctx.drawImage(imgRef.current, 0, 0);
-						const originalImageData = ctx.getImageData(0,0, imgRef.current.width, imgRef.current.height);
-						ctx.putImageData(TransformUtils.transformImageData(originalImageData, pixelConversionStrategy, blendMode || BlendMode.OPAQUE_FOREGROUND), 0, 0);
-					}
-			}
-	});
+	if (imgRef.current && canvasRef.current && imgRef.current.complete) {
+		canvasRef.current.width = imgRef.current.width;
+		canvasRef.current.height = imgRef.current.height;
+		const ctx = canvasRef.current.getContext('2d');
+		if (ctx) {
+			ctx.drawImage(imgRef.current, 0, 0);
+			const originalImageData = ctx.getImageData(0,0, imgRef.current.width, imgRef.current.height);
+			ctx.putImageData(TransformUtils.transformImageData(originalImageData, pixelConversionStrategy, blendMode || BlendMode.OPAQUE_FOREGROUND), 0, 0);
+		}
+	}
 
 	return (
 		<React.Fragment>
