@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { ColorStringUtils } from './colorStringUtils';
 import { TransformUtils, PixelReplacementFunction } from './transformUtils';
 import { getSimpleTransform } from './transforms/simpleTransform';
@@ -25,9 +25,8 @@ type Props = {
 
 const ReactChromakeyedImage: React.SFC<Props> = (props:Props) => {
 	const {src, findColor, replaceColor, tolerance, colorReplacementMap, replacementFunction, blendMode, ...otherProps } = props;
-
 	const imgRef = useRef<HTMLImageElement>(null);
-	const canvasRef = useRef<HTMLCanvasElement>(null);
+	const canvasRef = useState<HTMLCanvasElement>(null);
 
 	const pickStrategy = ():PixelReplacementFunction => {
 		if (replacementFunction) {
@@ -73,7 +72,7 @@ const ReactChromakeyedImage: React.SFC<Props> = (props:Props) => {
 	return (
 		<React.Fragment>
 			<div style={{display: 'none'}}>
-			<img ref={imgRef} src={src} />
+	  		<img ref={imgRef} src={src} />
 			</div>
 			<canvas ref={canvasRef} {...otherProps} />
 		</React.Fragment>
