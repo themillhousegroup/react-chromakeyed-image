@@ -1,6 +1,6 @@
 {
   "name": "react-chromakeyed-image",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "React Component allowing color substitutions to be defined on an image",
   "main": "lib/index.js",
   "scripts": {
@@ -37,6 +37,6 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "ts-jest": "^29.2.5",
-    "typescript": "^3.5.3"
+    "typescript": "^5.7.3"
   }
 }
