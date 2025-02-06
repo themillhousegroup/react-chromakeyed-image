@@ -1,5 +1,5 @@
 import { PixelUtils, RGBAPixel } from './pixelUtils';
-import { BlendMode } from './reactChromakeyedImage';
+import { BlendMode } from './ChromakeyedImage';
 
 export type PixelReplacementFunction = (pixel: RGBAPixel, x:number, y:number) => RGBAPixel;
 

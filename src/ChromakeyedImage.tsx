@@ -29,20 +29,23 @@ type ImageDetails = {
 }
 
 const ReactChromakeyedImage: React.FC<Props> = (props:Props) => {
+	console.log(`RCI IN`);
+
 	const {src, findColor, replaceColor, tolerance, colorReplacementMap, replacementFunction, blendMode, ...otherProps } = props;
 	const canvasRef = useRef<HTMLCanvasElement | null>(null);
 	const [imageDetails, setImageDetails] = useState<ImageDetails | null>(null);
 	
 	useEffect(() => {
 		console.log(`Loading image ${src}`);
-		const img = new Image();
+		const img: HTMLImageElement = new Image();
 		img.src = src;
+		console.log(`Keys: ${JSON.stringify(Object.getOwnPropertyNames(img), null, 2)}`)
 		img.decode().then(() => {
 			if (canvasRef.current) {
 				console.log(`Image ${src} loaded - updating canvas`);
 				canvasRef.current.width = img.width;
 				canvasRef.current.height = img.height;
-				const ctx = canvasRef.current.getContext('2d');
+				const ctx = canvasRef.current.getContext('2d', { willReadFrequently: true });
 				if (ctx) {
 					ctx.drawImage(img, 0, 0);
 					const imageData = ctx.getImageData(0,0, img.width, img.height);

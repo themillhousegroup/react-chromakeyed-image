@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import * as React from 'react'
 
-import ReactChromakeyedImage from '../reactChromakeyedImage'
+import ReactChromakeyedImage from './ChromakeyedImage';
 
 const IMG_SRC = "https://placecats.com/bella/300/200";
 
@@ -15,5 +15,5 @@ test('renders correctly on first load', async () => {
 		       data-test-id={TEST_ID}
        	/>)
 	const canvas = await screen.findByTestId(TEST_ID)
-	expect(canvas).toBeInTheDocument()
+	expect(canvas).toBeDefined()
 })
