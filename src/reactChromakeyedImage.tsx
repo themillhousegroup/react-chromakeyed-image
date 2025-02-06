@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { ColorStringUtils } from './colorStringUtils';
 import { TransformUtils, PixelReplacementFunction } from './transformUtils';
 import { getSimpleTransform } from './transforms/simpleTransform';
@@ -23,11 +23,35 @@ type Props = {
 	blendMode?: BlendMode;
 };
 
+type ImageDetails = {
+	ctx: CanvasRenderingContext2D;
+	imageData: ImageData;
+}
+
 const ReactChromakeyedImage: React.SFC<Props> = (props:Props) => {
 	const {src, findColor, replaceColor, tolerance, colorReplacementMap, replacementFunction, blendMode, ...otherProps } = props;
+	const canvasRef = useRef<HTMLCanvasElement | null>(null);
+	const [imageDetails, setImageDetails] = useState<ImageDetails | null>(null);
+	
+	useEffect(() => {
+		console.log(`Loading image ${src}`);
+		const img = new Image();
+		img.src = src;
+		img.decode().then(() => {
+			if (canvasRef.current) {
+				console.log(`Image ${src} loaded - updating canvas`);
+				canvasRef.current.width = img.width;
+				canvasRef.current.height = img.height;
+				const ctx = canvasRef.current.getContext('2d');
+				ctx.drawImage(img, 0, 0);
+				const imageData = ctx.getImageData(0,0, img.width, img.height);
+				setImageDetails({ ctx, imageData }); // will trigger a re-render
+			} else {
+				console.error('Canvas not initialized');
+			}
+		});
+	}, [src])
 
-	const imgRef = useRef<HTMLImageElement>(null);
-	const canvasRef = useRef<HTMLCanvasElement>(null);
 
 	const pickStrategy = ():PixelReplacementFunction => {
 		if (replacementFunction) {
@@ -57,24 +81,18 @@ const ReactChromakeyedImage: React.SFC<Props> = (props:Props) => {
 
 	}
 
-	const pixelConversionStrategy = pickStrategy();
-
-	if (imgRef.current && canvasRef.current && imgRef.current.complete) {
-		canvasRef.current.width = imgRef.current.width;
-		canvasRef.current.height = imgRef.current.height;
-		const ctx = canvasRef.current.getContext('2d');
-		if (ctx) {
-			ctx.drawImage(imgRef.current, 0, 0);
-			const originalImageData = ctx.getImageData(0,0, imgRef.current.width, imgRef.current.height);
-			ctx.putImageData(TransformUtils.transformImageData(originalImageData, pixelConversionStrategy, blendMode || BlendMode.OPAQUE_FOREGROUND), 0, 0);
-		}
+	if (imageDetails) {
+		// Write it back to the canvas
+		imageDetails.ctx.putImageData(
+			TransformUtils.transformImageData(
+				imageDetails.imageData, 
+				pickStrategy(), 
+				blendMode || BlendMode.OPAQUE_FOREGROUND), 
+			0, 0);
 	}
 
 	return (
 		<React.Fragment>
-			<div style={{display: 'none'}}>
-			<img ref={imgRef} src={src} />
-			</div>
 			<canvas ref={canvasRef} {...otherProps} />
 		</React.Fragment>
 	);
