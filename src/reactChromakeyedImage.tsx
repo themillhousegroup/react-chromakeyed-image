@@ -43,9 +43,13 @@ const ReactChromakeyedImage: React.SFC<Props> = (props:Props) => {
 				canvasRef.current.width = img.width;
 				canvasRef.current.height = img.height;
 				const ctx = canvasRef.current.getContext('2d');
-				ctx.drawImage(img, 0, 0);
-				const imageData = ctx.getImageData(0,0, img.width, img.height);
-				setImageDetails({ ctx, imageData }); // will trigger a re-render
+				if (ctx) {
+					ctx.drawImage(img, 0, 0);
+					const imageData = ctx.getImageData(0,0, img.width, img.height);
+					setImageDetails({ ctx, imageData });
+				} else {
+					console.error('Context not available');
+				} // will trigger a re-render
 			} else {
 				console.error('Canvas not initialized');
 			}
