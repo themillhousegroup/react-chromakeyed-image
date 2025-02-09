@@ -5,8 +5,8 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "jest",
-    "test-watch": "jest --watch",
-    "test-coverage": "jest --coverage",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage && open coverage/lcov-report/index.html",
     "build": "rm -rf ./lib && tsc",
     "prepare": "npm test && npm run build"
   },
@@ -41,5 +41,9 @@
     "react-dom": "^19.0.0",
     "ts-jest": "^29.2.5",
     "typescript": "^5.7.3"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   }
 }
